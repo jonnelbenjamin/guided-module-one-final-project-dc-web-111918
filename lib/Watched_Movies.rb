@@ -1,6 +1,7 @@
 require 'active_record'
 class Watched_Movies < ActiveRecord::Base
-
+belongs_to :user
+belongs_to :movie
 # @@all = []
 #
 #   def initialize(user,genre_input,runtime)

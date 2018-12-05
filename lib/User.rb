@@ -1,7 +1,7 @@
 require 'active_record'
 class User < ActiveRecord::Base
-has_many :movies
-has_many :watched_movies, through: :movies
+has_many :watched_movies
+has_many :movies, through: :watched_movies
 # attr_accessor :name, :free_time
 # @@all = []
 #
