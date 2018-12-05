@@ -1,6 +1,5 @@
 require 'pry'
 class CLI
-
   attr_accessor :runtime
 
   def call
@@ -11,10 +10,10 @@ class CLI
   #------Then based on free time, application searches for movie
   def start
     puts "Hello! What is your name?"
-    user_name = gets.strip.capitalize
+    user_name = STDIN.gets.strip.capitalize
     puts "Hello #{user_name}! How much free time do you have in minutes?"
 
-    free_time = gets.strip
+    free_time = STDIN.gets.strip
     # search_for_movie(free_time)
     choose_movie(free_time)
   end
@@ -30,16 +29,21 @@ class CLI
     puts available_movies[0].title
     puts "How does this sound?"
     puts "Respond with Yes or No"
-    response = gets.strip
-    if response.downcase == "no"
+    response = STDIN.gets.strip
+    while response.downcase == "no"
       available_movies.delete_at(0)
       puts "How about this one?"
       puts available_movies[0].title
-    elsif response.downcase == "yes"
-      puts "Have fun! Don't spoil the ending!:)"
-    else
-      puts "You're too picky!"
+      if available_movies.length == 1
+        puts "Ok! One last movie suggestion! Please say yes!"
+
+
     end
+    if STDIN.gets.strip.downcase == "yes"
+        puts "Have fun! Don't spoil the ending!:)"
+        break
+    end
+  end
     # binding.pry
   end
 
