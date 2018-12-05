@@ -1,2 +1,2 @@
-require_relative 'config/environment'
-Cli.new.call
+require_relative '../config/environment.rb'
+CLI.new.call
