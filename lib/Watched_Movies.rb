@@ -1,4 +1,5 @@
-class Watched_Movies
+require 'active_record'
+class Watched_Movies < ActiveRecord::Base
 
 @@all = []
 
