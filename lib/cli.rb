@@ -29,24 +29,24 @@ class CLI
     puts available_movies[0].title
     puts "How does this sound?"
     puts "Respond with Yes or No"
-    response = STDIN.gets.strip
+    response = STDIN.gets.strip.downcase
     until response.downcase == "yes" || available_movies.length == 1
       available_movies.delete_at(0)
       puts "How about this one?"
       puts available_movies[0].title
-      if available_movies.length == 1
+      response = STDIN.gets.strip.downcase
+      if available_movies.length == 2
         puts "Ok! One last movie suggestion! Please say yes!"
       end
-      if STDIN.gets.strip.downcase == "yes"
-        puts "Have fun! Don't spoil the ending!:)"
-      else
-        puts "You're too picky!"
-      end
+    end # Ends the UNTIL loop
+    if response == "yes"
+      puts "Have fun! Don't spoil the ending!:)"
+    else
+      puts "You're too picky"
     end
   end
 
 
 
 
-
-end
+end #Closes out the class
