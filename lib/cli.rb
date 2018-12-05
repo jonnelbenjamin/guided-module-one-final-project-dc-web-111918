@@ -30,21 +30,19 @@ class CLI
     puts "How does this sound?"
     puts "Respond with Yes or No"
     response = STDIN.gets.strip
-    while response.downcase == "no"
+    until response.downcase == "yes" || available_movies.length == 1
       available_movies.delete_at(0)
       puts "How about this one?"
       puts available_movies[0].title
       if available_movies.length == 1
         puts "Ok! One last movie suggestion! Please say yes!"
-
-
-    end
-    if STDIN.gets.strip.downcase == "yes"
+      end
+      if STDIN.gets.strip.downcase == "yes"
         puts "Have fun! Don't spoil the ending!:)"
-        break
+      else
+        puts "You're too picky!"
+      end
     end
-  end
-    # binding.pry
   end
 
 
