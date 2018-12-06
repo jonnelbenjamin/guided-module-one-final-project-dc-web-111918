@@ -10,12 +10,15 @@ class CLI
   #------Then based on free time, application searches for movie
   def start
     puts "Hello! What is your name?"
-    user_name = STDIN.gets.strip.capitalize
-    puts "Hello #{user_name}! How much free time do you have in minutes?"
+    puts "(Type 'quit' at any time to exit the application!)"
 
+    user_name = STDIN.gets.strip.capitalize
+    quit if user_name.downcase == 'quit'
+    puts "Hello #{user_name}! How much free time do you have in minutes?"
     free_time = STDIN.gets.strip
-    # search_for_movie(free_time)
+      quit if free_time.downcase == 'quit'
     choose_movie(free_time)
+    quit
   end
 
   def search_for_movie(free_time)
@@ -30,11 +33,13 @@ class CLI
     puts "How does this sound?"
     puts "Respond with Yes or No"
     response = STDIN.gets.strip.downcase
+      quit if response.downcase == 'quit'
     until response.downcase == "yes" || available_movies.length == 1
       available_movies.delete_at(0)
       puts "How about this one?"
       puts available_movies[0].title
       response = STDIN.gets.strip.downcase
+        quit if response.downcase == 'quit'
       if available_movies.length == 2
         puts "Ok! One last movie suggestion! Please say yes!"
       end
@@ -44,6 +49,11 @@ class CLI
     else
       puts "You're too picky"
     end
+  end
+
+  def quit
+    puts "Goodbye!"
+    exit
   end
 
 
