@@ -11,13 +11,15 @@ class CLI
   def start
     puts "Hello! What is your name?"
     puts "(Type 'quit' at any time to exit the application!)"
-
     user_name = STDIN.gets.strip.capitalize
     quit if user_name.downcase == 'quit'
+    # create_user(user_name)
     puts "Hello #{user_name}! How much free time do you have in minutes?"
     free_time = STDIN.gets.strip
       quit if free_time.downcase == 'quit'
-    choose_movie(free_time)
+    movie = choose_movie(free_time)
+    # binding.pry
+    create_watched_movie(user_name, movie)
     quit
   end
 
@@ -46,9 +48,21 @@ class CLI
     end # Ends the UNTIL loop
     if response == "yes"
       puts "Have fun! Don't spoil the ending!:)"
+      return available_movies[0]
     else
       puts "You're too picky"
     end
+  end
+
+
+
+  def create_watched_movie(name, movie)
+    user = create_user(name)
+    Watched_Movies.find_or_create_by(user: user, movie: movie)
+  end
+
+  def create_user(name)
+    User.create(name: name)
   end
 
   def quit
