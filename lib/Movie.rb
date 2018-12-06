@@ -9,7 +9,6 @@ def search_for_movie(free_time)
   # free_time = free_time.to_i
   Movie.all
   binding.pry
-
 end
 
 end

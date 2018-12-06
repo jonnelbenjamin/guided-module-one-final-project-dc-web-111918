@@ -9,6 +9,15 @@ class CLI
   #------Starts our application and asks for user's name and available free time
   #------Then based on free time, application searches for movie
   def start
+    puts "       |-----------------------|"
+    puts "       |                       |"
+    puts "       |      WELCOME TO       |"
+    puts "       |    PROCRASTINATION    |"
+    puts "       |       NATION!!!       |"
+    puts "       |                       |"
+    puts "       |                       |"
+    puts "       |                       |"
+    puts "       |_______________________|"
     puts "Hello! What is your name?"
     puts "(Type 'quit' at any time to exit the application!)"
     user_name = STDIN.gets.strip.capitalize
@@ -20,12 +29,21 @@ class CLI
     movie = choose_movie(free_time)
     # binding.pry
     create_watched_movie(user_name, movie)
+    puts "Would you like to view your watched history?"
+    recall_movies = STDIN.gets.strip
+    quit if recall_movies.downcase == "no"
+    User.retrieve
     quit
   end
 
   def search_for_movie(free_time)
     free_time = free_time.to_i
-    desired_movies = Movie.all.select{|movie| movie.runtime <= free_time}
+    if free_time < 90
+      puts "No movies for you"
+      quit
+    else
+      desired_movies = Movie.all.select{|movie| movie.runtime <= free_time}
+    end
     return desired_movies
   end #search_for_movie end
 
